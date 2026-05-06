@@ -70,7 +70,6 @@ class PropertyPrismaRepository {
             return new property_entity_1.PropertyEntity(property);
         }
         catch (error) {
-            // Si Prisma no encuentra el registro, arroja un error P2025
             return null;
         }
     }
