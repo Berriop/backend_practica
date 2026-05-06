@@ -5,6 +5,15 @@ export interface PropertyFilters {
   minPrice?: number;
   maxPrice?: number;
   available?: boolean;
+  page?: number;
+  limit?: number;
+}
+
+export interface PaginatedResult<T> {
+  data: T[];
+  total: number;
+  page: number;
+  limit: number;
 }
 
 export interface CreatePropertyDTO {
@@ -22,7 +31,7 @@ export interface UpdatePropertyDTO {
 }
 
 export abstract class PropertyRepository {
-  abstract findAll(filters?: PropertyFilters): Promise<PropertyEntity[]>;
+  abstract findAll(filters?: PropertyFilters): Promise<PaginatedResult<PropertyEntity>>;
   abstract findById(id: string | number): Promise<PropertyEntity | null>;
   abstract create(data: CreatePropertyDTO): Promise<PropertyEntity>;
   abstract update(id: string | number, data: UpdatePropertyDTO): Promise<PropertyEntity | null>;
