@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import authRoutes from './interfaces/http/routes/auth.routes';
+import { errorMiddleware, notFoundMiddleware } from './interfaces/http/middlewares/error.middleware';
 import propertyRoutes from './interfaces/http/routes/property.routes';
 
 const app: Application = express();
@@ -17,6 +18,12 @@ app.get('/', (req: Request, res: Response) => {
 // Rutas
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/properties', propertyRoutes);
+
+// Middleware para manejo de rutas no encontradas (404)
+app.use(notFoundMiddleware);
+
+// Middleware global de manejo de errores
+app.use(errorMiddleware);
 
 app.listen(PORT, () => {
   console.log(`Servidor ejecutándose en el puerto ${PORT}`);
