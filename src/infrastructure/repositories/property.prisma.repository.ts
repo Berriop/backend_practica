@@ -45,7 +45,7 @@ export class PropertyPrismaRepository implements PropertyRepository {
         where,
         skip,
         take: limit,
-        orderBy: { createdAt: 'desc' }
+        orderBy: { id: 'asc' }
       })
     ]);
 
